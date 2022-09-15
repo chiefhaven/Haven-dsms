@@ -8,6 +8,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\InvoiceSettingController;
@@ -73,6 +74,14 @@ Route::post('/editinstructor/{id}', [InstructorController::class, 'edit'])->midd
 Route::post('/updateinstructor', [InstructorController::class, 'update'])->middleware('auth')->name('instructors');
 Route::delete('/deleteinstructor/{id}', [InstructorController::class, 'destroy'])->middleware('auth')->name('instructors');
 
+Route::get('/administrators', [AdministratorController::class, 'index'])->middleware('auth')->name('adminitrators');
+Route::get('/viewadministrator', [AdministratorController::class, 'show'])->middleware('auth')->name('viewadministrator');
+Route::get('/addadministrator', [AdministratorController::class, 'create'])->middleware('auth')->name('addadministrator');
+Route::post('/storeadministrator', [AdministratorController::class, 'store'])->middleware('auth')->name('storeadministrator');
+Route::post('/editadministrator/{id}', [AdministratorController::class, 'edit'])->middleware('auth')->name('editadministrator');
+Route::post('/updateadministrator', [AdministratorController::class, 'update'])->middleware('auth')->name('updateadministrator');
+Route::delete('/deleteadministrator/{id}', [AdministratorController::class, 'destroy'])->middleware('auth')->name('deleteadministrator');
+
 Route::view('/fleet', 'fleet.fleet');
 Route::view('/addfleet', 'fleet.addfleet');
 Route::view('/editfleet', 'fleet.editfleet');
@@ -82,6 +91,10 @@ Route::view('/deletefleet', '');
 Route::get('/settings', [SettingController::class, 'edit'])->middleware('auth')->name('settings');
 Route::post('/settings-update', [SettingController::class, 'update'])->middleware('auth')->name('settings');
 Route::post('/invoicesettings-update', [InvoiceSettingController::class, 'update'])->middleware('auth')->name('settings');
+
+Route::get('/super-admin-profile', [InstructorController::class, 'show-super-admin'])->middleware('auth')->name('super-admin-profile');
+Route::get('/instructor-profile', [Controller::class, 'show-profile'])->middleware('auth')->name('instructor-profile');
+Route::get('/admin-profile', [AdminController::class, 'show'])->middleware('auth')->name('admin-profile');
 
 
 

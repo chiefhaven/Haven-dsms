@@ -44,6 +44,18 @@ class UsersTableSeeder extends Seeder
             'email' => Str::random(10).'@admin.com',
             'password' => bcrypt('password'),
         ]);
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'administrator_id' => '1',
+            'email' => Str::random(10).'@admin.com',
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'administrator_id' => '2',
+            'email' => Str::random(10).'@admin.com',
+            'password' => bcrypt('password'),
+        ]);
           
     }
 }

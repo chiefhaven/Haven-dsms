@@ -150,24 +150,23 @@
                 User Options
               </div>
               <div class="p-2">
-                <a class="dropdown-item" href="javascript:void(0)">
-                  <i class="far fa-fw fa-user me-1"></i> Profile
-                </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                  <span><i class="far fa-fw fa-envelope me-1"></i> Inbox</span>
-                  <span class="badge bg-primary rounded-pill">3</span>
-                </a>
+                <form method="GET" action="{{ route ('viewadministrator') }}">
+                @csrf
+                  <button class="dropdown-item" href="javascript:void(0)">
+                    <i class="far fa-fw fa-user me-1"></i> Profile
+                  </button>
+                </form>
                 <!-- END Side Overlay -->
 
                 <div role="separator" class="dropdown-divider"></div>
                 <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-dropdown-link :href="route('logout')" class="dropdown-item"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                <i class="far fa-fw fa-arrow-alt-circle-left me-1"></i>{{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
+                    @csrf
+                    <x-dropdown-link :href="route('logout')" class="dropdown-item"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        <i class="far fa-fw fa-arrow-alt-circle-left me-1"></i>{{ __('Log Out') }}
+                    </x-dropdown-link>
+                </form>
               </div>
             </div>
           </div>

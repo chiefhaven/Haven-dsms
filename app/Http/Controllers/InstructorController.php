@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\District;
 use App\Models\Lesson;
+use App\Models\Permission; 
+use App\Models\Role;
 use App\Http\Requests\StoreInstructorRequest;
 use App\Http\Requests\UpdateInstructorRequest;
 use Session;
@@ -92,6 +94,7 @@ class InstructorController extends Controller
         $user->password = Str::random(10);
 
         $user->save();
+        $user->assignRole('instructor');
 
         return redirect('/instructors')->with('message', 'Instructor added!');
     }
@@ -104,6 +107,19 @@ class InstructorController extends Controller
      */
     public function show(Instructor $instructor)
     {
+        $Administrator = Administrator::with('User')->find($id);
+        return view('instructors.viewinstructor', [ 'instructor' => $instructor ], compact('instructor'));
+    }
+
+    /**
+     * Display own profile.
+     *
+     * @param  \App\Models\Instructor  $instructor
+     * @return \Illuminate\Http\Response
+     */
+    public function showProfile()
+    {
+        $instructor = Instructor::find(Auth::user()->instructor_id);
         return view('instructors.viewinstructor', compact('instructor'));
     }
 
@@ -172,6 +188,7 @@ class InstructorController extends Controller
 
         $instructor->save();
         $user->save();
+        $user->assignRole('instructor');
 
         return redirect('/instructors')->with('message', 'Instructor updated!');
     }
